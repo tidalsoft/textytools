@@ -182,8 +182,7 @@ export default function PrivacyPolicy() {
                 The production Site uses Google Analytics to understand Site and
                 tool usage. Google Analytics loads network resources, sends
                 measurement requests, and may set or read analytics cookies such
-                as <code>_ga</code>. Preview and staging deployments do not load
-                the production analytics configuration by default.
+                as <code>_ga</code>.
               </p>
               <p className={paragraphClass}>
                 Textytools application-authored events may include the page URL
