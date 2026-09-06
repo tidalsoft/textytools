@@ -68,6 +68,12 @@ export default function PrivacyPolicy() {
                 to third-party websites or services linked from the Site, which
                 are governed by their own terms and privacy notices.
               </p>
+              <p className={paragraphClass}>
+                The Site has no user accounts. A person does not provide a name,
+                email address, or other account identifier to use a tool, and
+                Tidalsoft does not maintain a profile that connects a person to
+                their browser-local tool content.
+              </p>
             </section>
 
             <section className={sectionClass}>
@@ -202,6 +208,15 @@ export default function PrivacyPolicy() {
                 .
               </p>
               <p className={paragraphClass}>
+                Tidalsoft does not send a visitor&apos;s name, email address,
+                raw tool content, or a Textytools account identifier to Google
+                Analytics. Tidalsoft does not maintain a lookup that connects
+                Google&apos;s browser or device identifiers to an identified
+                person. Analytics activity therefore cannot ordinarily be found
+                in response to a request made only with a person&apos;s name or
+                email address.
+              </p>
+              <p className={paragraphClass}>
                 A person can restrict or remove cookies and other site data
                 using browser settings or content-blocking controls. The Site
                 does not currently display a separate cookie-consent manager.
@@ -234,6 +249,12 @@ export default function PrivacyPolicy() {
                   Resend Privacy Policy
                 </a>
                 .
+              </p>
+              <p className={paragraphClass}>
+                Because a feedback message contains the submitted name and email
+                address, it is the information Tidalsoft can ordinarily locate
+                by a person&apos;s identity. Sending feedback is optional and is
+                not required to use any tool.
               </p>
             </section>
 
@@ -336,12 +357,14 @@ export default function PrivacyPolicy() {
             <section className={sectionClass}>
               <h2 className={headingClass}>12. Canadian Privacy Rights</h2>
               <p className={paragraphClass}>
-                Subject to applicable Canadian privacy law, a person may request
-                access to personal information Tidalsoft holds about them,
+                Subject to applicable Canadian privacy law, a person may ask
+                whether Tidalsoft holds personal information about them and, if
+                it does, request access to that information. They may also
                 challenge its accuracy or completeness, request an appropriate
                 correction, withdraw consent where processing depends on
                 consent, or challenge Tidalsoft&apos;s compliance with
-                applicable privacy obligations.
+                applicable privacy obligations. If Tidalsoft holds no personal
+                information about the requester, the response will say so.
               </p>
               <p className={paragraphClass}>
                 Requests may be submitted using section 15. A person may also
@@ -380,8 +403,13 @@ export default function PrivacyPolicy() {
               </ul>
               <p className={paragraphClass}>
                 These rights are not absolute. Requests may be submitted using
-                section 15. The official text of the European Union regulation
-                is available through{" "}
+                section 15. Textytools does not require a person to create an
+                identity record merely so they can use these rights. If
+                Tidalsoft cannot identify any data as relating to the requester,
+                it may ask for additional information only where the applicable
+                law permits and the requester chooses to provide it. The
+                official text of the European Union regulation is available
+                through{" "}
                 <a
                   className={linkClass}
                   href="https://eur-lex.europa.eu/eli/reg/2016/679/oj"
@@ -417,7 +445,8 @@ export default function PrivacyPolicy() {
             <section className={sectionClass}>
               <h2 className={headingClass}>15. Contact and Privacy Requests</h2>
               <p className={paragraphClass}>
-                Questions, complaints, and privacy requests may be submitted to:
+                Questions, complaints, and requests to confirm whether Tidalsoft
+                holds personal information may be submitted to:
               </p>
               <ul className={listClass}>
                 <li>
@@ -437,9 +466,20 @@ export default function PrivacyPolicy() {
                 </li>
               </ul>
               <p className={paragraphClass}>
-                Tidalsoft may request information reasonably necessary to verify
-                a requester&apos;s identity, authority, and the records to which
-                the request relates.
+                Making a request does not mean that Tidalsoft has information to
+                return. Tidalsoft cannot retrieve browser-local tool content,
+                because that content is not sent to Tidalsoft. It also cannot
+                retrieve analytics or ordinary hosting data by a person&apos;s
+                name or email address where those identifiers were never
+                attached to the data. Tidalsoft may be able to locate a feedback
+                communication using the name or email address submitted with it.
+              </p>
+              <p className={paragraphClass}>
+                Tidalsoft will not require a person to provide more personal
+                information than is reasonably necessary to verify their
+                identity, authority, and the records to which a request relates.
+                If no responsive information can be identified, Tidalsoft will
+                say so rather than create or infer a record about the requester.
               </p>
             </section>
 
