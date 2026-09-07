@@ -22,17 +22,18 @@ test("Text Counter completes its primary counting job", async ({ page }) => {
 
   await page.getByLabel("Input Text").fill(fixture.input);
 
+  const counts = page.getByLabel("Text counts");
   await expect(
-    page.getByText("Characters", { exact: true }).locator(".."),
+    counts.getByText("Characters", { exact: true }).locator(".."),
   ).toContainText("16");
   await expect(
-    page.getByText("Words", { exact: true }).locator(".."),
+    counts.getByText("Words", { exact: true }).locator(".."),
   ).toContainText("3");
   await expect(
-    page.getByText("Lines", { exact: true }).locator(".."),
+    counts.getByText("Lines", { exact: true }).locator(".."),
   ).toContainText("2");
   await expect(
-    page.getByText("Paragraphs", { exact: true }).locator(".."),
+    counts.getByText("Paragraphs", { exact: true }).locator(".."),
   ).toContainText("1");
 });
 
@@ -165,13 +166,15 @@ test("a representative tool explains and honors its browser-data boundary", asyn
 }) => {
   await openTool(page, "text-counter", "Text Counter");
 
-  const dataNotice = page.getByLabel("Tool data handling");
-  await expect(dataNotice).toContainText("Processed in this browser");
-  await expect(dataNotice).toContainText(
-    "kept in this tab for this browser session",
+  const guide = page.getByRole("article", {
+    name: "Check your text at a glance",
+  });
+  await expect(page.getByLabel("Tool data handling")).toHaveCount(0);
+  await expect(guide).toContainText(
+    "processed in this browser and remembered in this tab for the session",
   );
   await expect(
-    dataNotice.getByRole("link", { name: "Privacy details" }),
+    guide.getByRole("link", { name: "Privacy details" }),
   ).toHaveAttribute("href", "/privacy");
 
   const syntheticContent = "private-boundary-fixture-2048";
@@ -303,3 +306,89 @@ test("the primary conversion path is keyboard operable", async ({ page }) => {
   );
   await expect(snakeCase).toBeFocused();
 });
+
+for (const documentedTool of [
+  {
+    slug: "text-counter" as const,
+    name: "Text Counter",
+    inputLabel: "Input Text",
+    guideTitle: "Check your text at a glance",
+    detailsTitle: "What the counts tell you",
+    expectedUseCase: "Write to a limit",
+  },
+  {
+    slug: "case-converter" as const,
+    name: "Case Converter",
+    inputLabel: "Input Text",
+    guideTitle: "A quick format change, ready to copy",
+    detailsTitle: "Choose the right format",
+    expectedUseCase: "Prepare names for code",
+  },
+]) {
+  test(`${documentedTool.name} exposes the complete tool-documentation pattern`, async ({
+    page,
+    request,
+  }) => {
+    const response = await request.get(`/${documentedTool.slug}`);
+    expect(response.ok()).toBe(true);
+    const html = await response.text();
+    expect(html).toContain(documentedTool.guideTitle);
+    expect(html).toContain(`id="${documentedTool.slug}-guide"`);
+
+    await openTool(page, documentedTool.slug, documentedTool.name);
+
+    const input = page.getByLabel(documentedTool.inputLabel).first();
+    const guide = page.getByRole("article", {
+      name: documentedTool.guideTitle,
+    });
+    await expect(input).toBeVisible();
+    await expect(guide).toBeVisible();
+    await expect(
+      guide.getByRole("heading", {
+        level: 3,
+        name: documentedTool.expectedUseCase,
+      }),
+    ).toBeVisible();
+    for (const heading of [
+      "How to use it",
+      documentedTool.detailsTitle,
+      "Example",
+      "Good to know",
+    ]) {
+      await expect(
+        guide.getByRole("heading", { level: 3, name: heading }),
+      ).toBeAttached();
+    }
+    await expect(
+      guide.getByRole("link", { name: "Privacy details" }),
+    ).toHaveAttribute("href", "/privacy");
+    await expect(page.getByLabel("Tool data handling")).toHaveCount(0);
+
+    const toolComesBeforeGuide = await input.evaluate((element) => {
+      const article = document.querySelector("article");
+      return Boolean(
+        article &&
+        element.compareDocumentPosition(article) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+      );
+    });
+    expect(toolComesBeforeGuide).toBe(true);
+
+    const structuredData = JSON.parse(
+      (await page
+        .locator('script[type="application/ld+json"]')
+        .textContent()) ?? "{}",
+    ) as { description?: string; featureList?: string[] };
+    expect(structuredData.description).toBeTruthy();
+    expect(structuredData.featureList).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining(documentedTool.expectedUseCase),
+      ]),
+    );
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= window.innerWidth,
+      ),
+    ).toBe(true);
+  });
+}

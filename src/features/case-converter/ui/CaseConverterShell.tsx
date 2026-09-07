@@ -17,7 +17,7 @@ export function CaseConverterShell() {
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(convertedText);
-      showToast("Copied to clipboard");
+      showToast("Copied converted text");
       trackCopyEvent({
         tool: TOOL_NAMES.CASE_CONVERTER,
         caseType: selectedCase,

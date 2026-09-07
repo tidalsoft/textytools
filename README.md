@@ -69,7 +69,8 @@ before they appear in standard reports.
 
 ### Text Counter
 
-Count characters, words, lines, paragraphs, and AI tokens (GPT-4) in real-time. Useful for content creation, API cost estimation, and text analysis.
+Count characters, words, lines, paragraphs, and estimated AI tokens in real
+time. Useful for writing to a limit, editing drafts, and planning prompt length.
 
 - **Location**: [/text-counter](app/text-counter/page.tsx)
 - **Features**: Character, word, line, paragraph, and token counting

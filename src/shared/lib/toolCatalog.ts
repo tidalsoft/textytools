@@ -5,10 +5,10 @@ export const TOOL_CATALOG = [
     slug: "text-counter",
     name: "Text Counter",
     description:
-      "Count characters, words, lines, paragraphs and AI tokens in real-time",
-    metadataTitle: "Text Counter - Count words, characters, lines, tokens",
+      "Count characters, words, lines, paragraphs, and estimated AI tokens in real time",
+    metadataTitle: "Text Counter - Count words, characters, lines, and tokens",
     metadataDescription:
-      "Count characters, words, lines, paragraphs, and AI tokens (GPT-4) in real-time. Free browser-based text analysis tool for content creation and API cost estimation.",
+      "Count characters, words, lines, and paragraphs, and estimate AI tokens in real time with a free browser-based text analysis tool.",
     keywords: [
       "word counter",
       "character counter",

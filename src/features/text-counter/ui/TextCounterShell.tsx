@@ -17,7 +17,10 @@ export function TextCounterShell() {
 
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-6">
+      <div
+        aria-label="Text counts"
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-6"
+      >
         <div className="bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 p-3">
           <div className="text-xs text-zinc-600 dark:text-zinc-400 mb-1">
             Characters
@@ -56,7 +59,7 @@ export function TextCounterShell() {
 
         <div className="bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 p-3">
           <div className="text-xs text-zinc-600 dark:text-zinc-400 mb-1">
-            Tokens (GPT-4+)
+            Estimated tokens
           </div>
           <div className="text-xl font-bold text-zinc-900 dark:text-zinc-50">
             {tokenCount}

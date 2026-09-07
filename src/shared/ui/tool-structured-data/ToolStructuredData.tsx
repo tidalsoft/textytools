@@ -1,6 +1,12 @@
 import { getTool, SITE_URL, type ToolSlug } from "@/shared/lib/toolCatalog";
 
-export function ToolStructuredData({ slug }: { slug: ToolSlug }) {
+export function ToolStructuredData({
+  featureList,
+  slug,
+}: {
+  featureList?: readonly string[];
+  slug: ToolSlug;
+}) {
   const tool = getTool(slug);
   const data = {
     "@context": "https://schema.org",
@@ -10,6 +16,7 @@ export function ToolStructuredData({ slug }: { slug: ToolSlug }) {
     description: tool.metadataDescription,
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Any",
+    ...(featureList && { featureList }),
     offers: {
       "@type": "Offer",
       price: "0",

@@ -87,9 +87,9 @@ Every tool also has a return-to-home action and the shared feedback path.
 - Current automated evidence: focused counter unit tests and a Playwright primary-job baseline.
 - Regression contract: empty and whitespace-only text; Unicode and line endings;
   paragraph boundaries; known `cl100k_base` examples; tokenization failure.
-- Known claim gap: the interface says “Tokens (GPT-4+)”, while the implementation
-  specifically uses `cl100k_base`. That is not proof of token counts for every
-  model described by “GPT-4+”.
+- Claim boundary: the interface labels the result “Estimated tokens,” and the
+  tool guide explains that actual counts can vary by model. The implementation
+  uses `cl100k_base`, protected by the tokenizer regression examples.
 
 ## Diff Viewer
 

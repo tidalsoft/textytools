@@ -20,6 +20,8 @@ interface ToolFrameProps {
   headerRight?: ReactNode;
   /** Tool name for analytics tracking */
   toolName: string;
+  /** Show the shared data-handling summary when the page has no inline guide */
+  showDataHandling?: boolean;
 }
 
 export function ToolFrame({
@@ -29,6 +31,7 @@ export function ToolFrame({
   maxWidth = "7xl",
   headerRight,
   toolName,
+  showDataHandling = true,
 }: ToolFrameProps) {
   const maxWidthClass = `max-w-${maxWidth}`;
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
@@ -85,26 +88,28 @@ export function ToolFrame({
           {headerRight && <div>{headerRight}</div>}
         </div>
 
-        <aside
-          aria-label="Tool data handling"
-          className="mb-8 rounded-lg border border-zinc-200 bg-white px-4 py-3 text-sm leading-relaxed text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400"
-        >
-          <strong className="text-zinc-900 dark:text-zinc-50">
-            Processed in this browser.
-          </strong>{" "}
-          Current tool content and settings are kept in this tab for this
-          browser session and may survive reload or session restore. Use the
-          tool&apos;s Clear control to remove its current content, or browser
-          site-data controls to remove all stored content and settings. Site
-          analytics and submitted feedback use network services.{" "}
-          <Link
-            href="/privacy"
-            className="underline hover:text-zinc-900 dark:hover:text-zinc-50"
+        {showDataHandling && (
+          <aside
+            aria-label="Tool data handling"
+            className="mb-8 rounded-lg border border-zinc-200 bg-white px-4 py-3 text-sm leading-relaxed text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400"
           >
-            Privacy details
-          </Link>
-          .
-        </aside>
+            <strong className="text-zinc-900 dark:text-zinc-50">
+              Processed in this browser.
+            </strong>{" "}
+            Current tool content and settings are kept in this tab for this
+            browser session and may survive reload or session restore. Use the
+            tool&apos;s Clear control to remove its current content, or browser
+            site-data controls to remove all stored content and settings. Site
+            analytics and submitted feedback use network services.{" "}
+            <Link
+              href="/privacy"
+              className="underline hover:text-zinc-900 dark:hover:text-zinc-50"
+            >
+              Privacy details
+            </Link>
+            .
+          </aside>
+        )}
 
         {/* Content */}
         {children}
