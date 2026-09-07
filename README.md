@@ -13,6 +13,10 @@ The verified behavior and boundaries of the nine public tools are recorded in
 Result certainty, safety, processing, persistence, and recovery language is
 defined in [`TRUST.md`](TRUST.md).
 
+The product-owned information, interaction, visual, responsive, accessibility,
+token, primitive, and design-fixture contract is defined in
+[`DESIGN.md`](DESIGN.md).
+
 The synthetic test-data boundary and required scenario catalog are defined in
 [`FIXTURES.md`](FIXTURES.md).
 
@@ -293,57 +297,16 @@ See [diff-viewer README](src/features/diff-viewer/README.md) for a complete impl
 
 ## Design System & Patterns
 
-### Color Palette
+[`DESIGN.md`](DESIGN.md) is the authority for the Textytools information
+hierarchy, source/result relationships, interaction states, responsive behavior,
+accessibility, tokens, shared primitives, and representative design fixtures.
+Use the capability and trust contracts with it; an existing screen is evidence,
+not automatic design precedent.
 
-The project uses a minimal zinc-based color palette with dark mode support:
-
-- **Light Mode**: `zinc-50` background, `zinc-900` text
-- **Dark Mode**: `zinc-950` background, `zinc-50` text
-- **Borders**: `zinc-200` (light) / `zinc-800` (dark)
-- **Interactive**: Hover states use `zinc-300/zinc-700`
-
-### Sga
-
-All utilities use ToolFrame
-
-### Typography
-
-- **Headers**: Bold, tracking-tight, responsive sizing (text-4xl, text-xl, etc.)
-- **Body Text**: `text-zinc-600 dark:text-zinc-400` for descriptions
-- **Code/Data**: `font-mono text-sm` for technical content
-
-### Components & Interactivity
-
-- `Modal.tsx` - A reusable component for modal dialogs. Forms should be implemented as children (like `FeedbackModal.tsx`)
-- `TextEditorContainer.tsx`, which wraps `TextEditor.tsx` to enforce consistency for input and output textareas across tools
-- `Toast.tsx` for displaying ephemeral messages to the user
-- `ToolCard.tsx` used on the main page for navigation to tools
-- `ToolFrame.tsx` is the root component for all tools to ensure consistency in their layout.
-
-#### Buttons & Controls
-
-- **Primary Actions**: Bordered cards with hover effects and cursor-pointer
-- **Secondary Actions**: Text links with color transitions
-- **Disabled State**: `opacity-50 cursor-not-allowed`
-
-#### Stats/Metrics Display
-
-```tsx
-<div className="bg-white dark:bg-zinc-900 rounded-lg border... p-4">
-  <div className="text-sm text-zinc-600...">Label</div>
-  <div className="text-3xl font-bold...">{value}</div>
-</div>
-```
-
-### State Management
-
-All utilities use local React state (`useState`, `useMemo`) with client-side rendering (`"use client"`). No global state or external state management is required.
-
-### Responsive Design
-
-- **Mobile**: Single column layouts with full-width components
-- **Tablet**: `md:` breakpoints for 2-column grids
-- **Desktop**: `lg:` breakpoints for complex layouts (2/3 + 1/3 splits, etc.)
+The current shared implementation includes `ToolFrame`, `TextEditor`,
+`ToolDocumentation`, `ToolCard`, `SearchBox`, `Modal`, and `Toast`. Reuse an
+existing product primitive when its contract fits, and extend it only for a new
+semantic need rather than a one-off visual value.
 
 ## Adding New Utilities
 
@@ -493,50 +456,20 @@ Edit [app/page.tsx](app/page.tsx) to add your utility using the `ToolCard` compo
 
 ### 9. Design Considerations
 
-**Keep it simple**: Focus on a single, well-defined task
-
-- Each utility should do one thing well
-- Avoid feature creep; split complex functionality into separate utilities
-
-**Make it fast**: All processing should be client-side and real-time
-
-- Use `useMemo` for expensive calculations
-- Debounce only if absolutely necessary (prefer instant updates)
-
-**Maintain consistency**: Follow the established patterns
-
-- Use the same color palette and spacing
-- Match the layout structure of existing utilities
-- Reuse component patterns (input/output areas, stats displays, buttons)
-
-**Ensure accessibility**:
-
-- Provide clear labels for all inputs
-- Use semantic HTML
-- Test keyboard navigation
-- Support dark mode automatically
-
-**Consider edge cases**:
-
-- Empty input states with helpful placeholder text
-- Error handling with user-friendly messages
-- Large data sets (optimize rendering if needed)
-- Copy-to-clipboard functionality for outputs
+Apply [`DESIGN.md`](DESIGN.md), [`TRUST.md`](TRUST.md), and the relevant
+[`FIXTURES.md`](FIXTURES.md) scenarios. Preserve the immediate browser-local
+path, keep source and result relationships honest, expose assumptions and loss,
+and verify the complete task across keyboard, focus, zoom, color schemes,
+reduced motion, realistic density, and recovery states.
 
 ### 10. Common Patterns to Reuse
 
-**TextEditor with Line Numbers**:
-
-- [TextEditor component](app/components/TextEditor.tsx) - Core textarea with line numbers, syntax highlighting, and read-only mode
-- [TextEditorContainer component](app/components/TextEditorContainer.tsx) - Pre-styled container wrapper for TextEditor with consistent styling and scroll behavior. **Use this for most cases**. See [json-wizard](app/json-wizard/page.tsx) for implementation example
-
-**Option Selection Grid**: See [case-converter](app/case-converter/page.tsx:251-268) for radio-style selection
-
-**Checkbox Options**: See [text-sanitizer](app/text-sanitizer/page.tsx:289-309) for multi-select filters
-
-**Stats Display**: See [text-counter](app/text-counter/page.tsx:57-102) for metric cards
-
-**Advanced UI with Search**: See [json-wizard](app/json-wizard/page.tsx) for search implementation with TextEditor
+- [TextEditor](src/entities/editor/ui/TextEditor.tsx) for source and result data
+- [ToolFrame](src/shared/ui/tool-frame/ToolFrame.tsx) for the shared tool-page hierarchy
+- [ToolDocumentation](src/shared/ui/tool-documentation/ToolDocumentation.tsx) for task-led guides
+- [SearchBox](src/shared/ui/search-box/SearchBox.tsx) for search and match navigation
+- [Case Converter](src/features/case-converter/ui/CaseConverterShell.tsx) for exclusive option selection
+- [Text Sanitizer](src/features/text-sanitizer/ui/TextSanitizerShell.tsx) for multiple cleanup options
 
 ## Development
 
