@@ -214,6 +214,12 @@ This is the only direct-branch exception. It never permits a direct commit or pu
 “Promote staging to production” and “deploy to production” both mean advancing `main` to the
 exact commit already validated on `staging`, then pushing `main`:
 
+Only deploy to production when the user explicitly requests a production deployment.
+Approval to deploy to staging, confirmation that staging was manually verified or accepted,
+a production-ready state, or a request to finish, complete, close, or continue the workflow
+does not authorize production deployment. Once staging passes its required gates, stop and
+ask the user whether to deploy to production unless that explicit request already exists.
+
 ```bash
 git fetch origin
 git switch main

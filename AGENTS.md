@@ -122,6 +122,11 @@ Report any check that was not run and why. Do not claim verification based only 
   automated evidence and ask the user for authenticated manual verification; do not treat
   the SSO login response as application validation or promote to production without the
   user's explicit verification.
+- Deploy to production only when the user explicitly requests a production deployment.
+  Staging approval, staging verification or acceptance, production readiness, and requests
+  to finish, complete, close, or continue a workflow do not authorize production deployment.
+  After staging is accepted, stop and ask whether to deploy to production unless the user
+  has already explicitly requested it.
 - Never force-push any branch. Published history is commit-forward: correct prior work
   with a new commit or revert commit, never by amending, resetting, rebasing, or replacing
   published commits.
