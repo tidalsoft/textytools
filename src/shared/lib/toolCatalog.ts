@@ -73,7 +73,7 @@ export const TOOL_CATALOG = [
       "Clean and transform text with customizable sanitization options",
     metadataTitle: "Text Sanitizer - Clean, trim, and normalize text quickly",
     metadataDescription:
-      "Clean and transform text with 12 customizable sanitization options. Trim lines, remove empty/duplicate lines, strip emoji/punctuation/numbers, normalize whitespace, sort/reverse lines. Free browser-based text cleaning tool.",
+      "Clean text with 12 selectable operations for lines, whitespace, character removal, sorting, and reversal. Review the result beside the source in your browser.",
     keywords: [
       "text sanitizer",
       "clean text",
@@ -110,10 +110,10 @@ export const TOOL_CATALOG = [
   {
     slug: "csv-json-converter",
     name: "CSV / JSON Converter",
-    description: "Convert between JSON and CSV formats with proper parsing",
+    description: "Convert CSV rows to JSON or JSON arrays to CSV",
     metadataTitle: "CSV / JSON Converter - Convert between CSV and JSON",
     metadataDescription:
-      "Bidirectional converter between CSV and JSON formats with proper data type parsing and nested object support. Features auto-detect types, configurable delimiters, and proper CSV escaping. Free browser-based CSV JSON converter.",
+      "Convert CSV rows to JSON or JSON arrays to CSV with inferred scalar values, dotted nested fields, configurable delimiters, and quoted-field escaping in your browser.",
     keywords: [
       "csv to json",
       "json to csv",
@@ -134,7 +134,7 @@ export const TOOL_CATALOG = [
     description: "Encode and decode text using Base64, URL, Hex, and more",
     metadataTitle: "Text Encoder - Encode, decode, and hash text formats",
     metadataDescription:
-      "Encode and decode text using 17 different formats: Base64, Base58, Base91, ASCII85, Z85, URL encoding, HTML entities, hexadecimal, binary, Unicode, ROT13, Morse code, MD5, SHA-1, SHA-256, SHA-512. Free browser-based text encoder.",
+      "Encode, decode, or hash text with 17 available options, including Base64, URL encoding, hexadecimal, binary, Unicode escapes, ROT13, Morse code, MD5, SHA-1, SHA-256, and SHA-512.",
     keywords: [
       "text encoder",
       "base64 encode",
@@ -154,8 +154,8 @@ export const TOOL_CATALOG = [
   {
     slug: "jwt-decoder",
     name: "JWT Decoder",
-    description: "Decode and inspect JSON Web Tokens with validation",
-    metadataTitle: "JWT Decoder - Inspect, validate, and decode tokens",
+    description: "Decode and inspect JSON Web Token contents and time claims",
+    metadataTitle: "JWT Decoder - Decode and inspect token claims",
     metadataDescription:
       "Decode and inspect JSON Web Tokens (JWT) in your browser with syntax highlighting and automatic claim checks. View header, payload, signature text, algorithm, expiration, and standard claims without signature verification.",
     keywords: [
@@ -175,10 +175,10 @@ export const TOOL_CATALOG = [
     slug: "regex-tester",
     name: "Regex Tester",
     description:
-      "Test regular expressions with real-time match highlighting and capture groups",
+      "Test JavaScript regular expressions with match highlighting and capture groups",
     metadataTitle: "Regex Tester - Test patterns and capture groups online",
     metadataDescription:
-      "Test JavaScript regular expressions with real-time match highlighting, capture group extraction, flags, and CSV conversion. Free browser-based regex tester.",
+      "Test JavaScript regular expressions with match highlighting, capture group extraction, flags, and CSV conversion in your browser.",
     keywords: [
       "regex tester",
       "regular expression tester",

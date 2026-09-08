@@ -4,6 +4,7 @@ import {
   JsonWizardProvider,
   JsonWizardShell,
   JsonWizardHeader,
+  JsonWizardDocumentation,
 } from "@/features/json-wizard";
 
 import { TOOL_NAMES } from "@/shared/lib/constants";
@@ -17,8 +18,10 @@ export default function JSONWizard() {
         description="Format, validate, and search JSON with real-time feedback."
         toolName={TOOL_NAMES.JSON_WIZARD}
         headerRight={<JsonWizardHeader />}
+        showDataHandling={false}
       >
         <JsonWizardShell />
+        <JsonWizardDocumentation />
       </ToolFrame>
     </JsonWizardProvider>
   );

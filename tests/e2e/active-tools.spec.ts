@@ -126,14 +126,20 @@ test("JWT Decoder completes its primary decode job", async ({ page }) => {
   await expect(page.getByLabel("Decoded Token")).toHaveValue(
     /"name": "Ada Example"/,
   );
-  await expect(page.getByText(/without signature verification/i)).toBeVisible();
+  await expect(
+    page.getByText(
+      /This tool decodes and displays the contents without signature verification/i,
+    ),
+  ).toBeVisible();
 });
 
 test("Regex Tester completes its primary matching job", async ({ page }) => {
   const fixture = ACTIVE_PRODUCT_FIXTURES.regexTester;
   await openTool(page, fixture.tool, "Regex Tester");
 
-  await page.getByLabel("Pattern").fill(fixture.input.pattern);
+  await page
+    .getByRole("textbox", { name: "Pattern", exact: true })
+    .fill(fixture.input.pattern);
   await page.getByLabel("Test String").fill(fixture.input.text);
 
   await expect(page.getByText("1 / 2", { exact: true })).toBeVisible();
@@ -161,20 +167,14 @@ test("tool state survives a same-session reload", async ({ page }) => {
   await expect(page.getByLabel("Input Text")).toHaveValue(fixture.input);
 });
 
-test("a representative tool explains and honors its browser-data boundary", async ({
+test("a representative tool honors its browser-data boundary", async ({
   page,
 }) => {
   await openTool(page, "text-counter", "Text Counter");
 
-  const guide = page.getByRole("article", {
-    name: "Check your text at a glance",
-  });
   await expect(page.getByLabel("Tool data handling")).toHaveCount(0);
-  await expect(guide).toContainText(
-    "processed in this browser and remembered in this tab for the session",
-  );
   await expect(
-    guide.getByRole("link", { name: "Privacy details" }),
+    page.getByRole("contentinfo").getByRole("link", { name: "Privacy Policy" }),
   ).toHaveAttribute("href", "/privacy");
 
   const syntheticContent = "private-boundary-fixture-2048";
@@ -311,18 +311,74 @@ for (const documentedTool of [
   {
     slug: "text-counter" as const,
     name: "Text Counter",
-    inputLabel: "Input Text",
+    toolSelector: "#text-counter-input",
     guideTitle: "Check your text at a glance",
     detailsTitle: "What the counts tell you",
     expectedUseCase: "Write to a limit",
   },
   {
+    slug: "diff-viewer" as const,
+    name: "Diff Viewer",
+    toolSelector: "#diff-input",
+    guideTitle: "See what changed between two texts",
+    detailsTitle: "How to read the comparison",
+    expectedUseCase: "Review an edit",
+  },
+  {
     slug: "case-converter" as const,
     name: "Case Converter",
-    inputLabel: "Input Text",
+    toolSelector: "#case-converter-input",
     guideTitle: "A quick format change, ready to copy",
     detailsTitle: "Choose the right format",
     expectedUseCase: "Prepare names for code",
+  },
+  {
+    slug: "text-sanitizer" as const,
+    name: "Text Sanitizer",
+    toolSelector: "#text-sanitizer-input",
+    guideTitle: "Clean text while keeping the source in view",
+    detailsTitle: "Choose the cleanup you need",
+    expectedUseCase: "Tidy pasted text",
+  },
+  {
+    slug: "json-wizard" as const,
+    name: "JSON Wizard",
+    toolSelector: "#json-wizard-input",
+    guideTitle: "Parse, format, and search JSON",
+    detailsTitle: "Choose a JSON view",
+    expectedUseCase: "Pretty-print JSON",
+  },
+  {
+    slug: "csv-json-converter" as const,
+    name: "CSV / JSON Converter",
+    toolSelector: "#csv-json-input",
+    guideTitle: "Move tabular data between CSV and JSON",
+    detailsTitle: "How conversion is interpreted",
+    expectedUseCase: "Turn CSV rows into JSON",
+  },
+  {
+    slug: "text-encoder" as const,
+    name: "Text Encoder",
+    toolSelector: "#text-encoder-input",
+    guideTitle: "Encode, decode, or hash a text value",
+    detailsTitle: "Choose the right operation",
+    expectedUseCase: "Prepare an encoded value",
+  },
+  {
+    slug: "jwt-decoder" as const,
+    name: "JWT Decoder",
+    toolSelector: "#jwt-input",
+    guideTitle: "Decode and inspect JWT claims",
+    detailsTitle: "What the decoder checks",
+    expectedUseCase: "Inspect token claims",
+  },
+  {
+    slug: "regex-tester" as const,
+    name: "Regex Tester",
+    toolSelector: "#regex-pattern",
+    guideTitle: "Test a JavaScript pattern against real text",
+    detailsTitle: "Understand the result",
+    expectedUseCase: "Develop a JavaScript pattern",
   },
 ]) {
   test(`${documentedTool.name} exposes the complete tool-documentation pattern`, async ({
@@ -337,11 +393,11 @@ for (const documentedTool of [
 
     await openTool(page, documentedTool.slug, documentedTool.name);
 
-    const input = page.getByLabel(documentedTool.inputLabel).first();
+    const firstToolControl = page.locator(documentedTool.toolSelector);
     const guide = page.getByRole("article", {
       name: documentedTool.guideTitle,
     });
-    await expect(input).toBeVisible();
+    await expect(firstToolControl).toBeVisible();
     await expect(guide).toBeVisible();
     await expect(
       guide.getByRole("heading", {
@@ -360,11 +416,14 @@ for (const documentedTool of [
       ).toBeAttached();
     }
     await expect(
-      guide.getByRole("link", { name: "Privacy details" }),
+      page
+        .getByRole("contentinfo")
+        .getByRole("link", { name: "Privacy Policy" }),
     ).toHaveAttribute("href", "/privacy");
     await expect(page.getByLabel("Tool data handling")).toHaveCount(0);
+    await expect(page.locator("hr")).toHaveCount(0);
 
-    const toolComesBeforeGuide = await input.evaluate((element) => {
+    const toolComesBeforeGuide = await firstToolControl.evaluate((element) => {
       const article = document.querySelector("article");
       return Boolean(
         article &&

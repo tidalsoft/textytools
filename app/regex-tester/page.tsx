@@ -4,6 +4,7 @@ import {
   RegexTesterProvider,
   RegexTesterShell,
   RegexTesterHeader,
+  RegexTesterDocumentation,
 } from "@/features/regex-tester";
 
 import { TOOL_NAMES } from "@/shared/lib/constants";
@@ -14,11 +15,13 @@ export default function RegexTester() {
     <RegexTesterProvider>
       <ToolFrame
         title="Regex Tester"
-        description="Test regular expressions with real-time match highlighting and capture group extraction."
+        description="Test JavaScript regular expressions with match highlighting and capture group extraction."
         toolName={TOOL_NAMES.REGEX_TESTER}
         headerRight={<RegexTesterHeader />}
+        showDataHandling={false}
       >
         <RegexTesterShell />
+        <RegexTesterDocumentation />
       </ToolFrame>
     </RegexTesterProvider>
   );

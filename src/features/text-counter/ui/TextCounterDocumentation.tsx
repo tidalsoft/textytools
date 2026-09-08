@@ -66,8 +66,6 @@ const documentation = {
     "Token counts are estimates, so check the destination model when an exact limit matters.",
     "Use Clear when you are finished with the current text.",
   ],
-  privacyNote:
-    "Your text is processed in this browser and remembered in this tab for the session.",
 } satisfies ToolDocumentationContent;
 
 export const TEXT_COUNTER_DOCUMENTATION_FEATURES = documentation.useCases.map(

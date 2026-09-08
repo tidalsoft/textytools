@@ -20,5 +20,4 @@ export interface ToolDocumentationContent {
   details: readonly GuideItem[];
   example: GuideExample;
   tips: readonly string[];
-  privacyNote: string;
 }

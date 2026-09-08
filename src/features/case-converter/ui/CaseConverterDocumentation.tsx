@@ -56,8 +56,6 @@ const documentation = {
     "Give names and acronyms a quick review before copying the result.",
     "Copy puts the converted text on your clipboard; Clear starts over.",
   ],
-  privacyNote:
-    "Your text is processed in this browser and remembered in this tab for the session.",
 } satisfies ToolDocumentationContent;
 
 export const CASE_CONVERTER_DOCUMENTATION_FEATURES = documentation.useCases.map(

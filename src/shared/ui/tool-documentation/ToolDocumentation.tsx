@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import type { ToolDocumentationContent } from "./types";
 
 import type { ToolSlug } from "@/shared/lib/toolCatalog";
@@ -107,16 +105,6 @@ export function ToolDocumentation({
           ))}
         </ul>
       </GuideSection>
-
-      <p className="mt-10 text-sm leading-6 text-zinc-500 dark:text-zinc-400">
-        {documentation.privacyNote}{" "}
-        <Link
-          className="underline underline-offset-4 hover:text-zinc-900 dark:hover:text-zinc-50"
-          href="/privacy"
-        >
-          Privacy details
-        </Link>
-      </p>
     </article>
   );
 }
@@ -144,7 +132,7 @@ function ExampleValue({ label, value }: { label: string; value: string }) {
       <p className="text-xs font-semibold tracking-wide text-zinc-500 uppercase dark:text-zinc-400">
         {label}
       </p>
-      <p className="mt-2 font-mono text-sm leading-6 break-words text-zinc-900 dark:text-zinc-100">
+      <p className="mt-2 whitespace-pre-wrap font-mono text-sm leading-6 break-words text-zinc-900 dark:text-zinc-100">
         {value}
       </p>
     </div>

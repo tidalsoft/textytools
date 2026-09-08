@@ -4,6 +4,7 @@ import {
   JwtDecoderProvider,
   JwtDecoderShell,
   JwtDecoderHeader,
+  JwtDecoderDocumentation,
 } from "@/features/jwt-decoder";
 
 import { TOOL_NAMES } from "@/shared/lib/constants";
@@ -14,11 +15,13 @@ export default function JWTDecoder() {
     <JwtDecoderProvider>
       <ToolFrame
         title="JWT Decoder"
-        description="Decode and inspect JSON Web Tokens (JWT) with real-time validation"
+        description="Decode and inspect JSON Web Token contents and time claims without signature verification."
         toolName={TOOL_NAMES.JWT_DECODER}
         headerRight={<JwtDecoderHeader />}
+        showDataHandling={false}
       >
         <JwtDecoderShell />
+        <JwtDecoderDocumentation />
       </ToolFrame>
     </JwtDecoderProvider>
   );

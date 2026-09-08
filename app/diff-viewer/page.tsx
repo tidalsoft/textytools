@@ -4,6 +4,7 @@ import {
   DiffViewerProvider,
   DiffViewerShell,
   DiffViewerHeader,
+  DiffViewerDocumentation,
 } from "@/features/diff-viewer";
 
 import { TOOL_NAMES } from "@/shared/lib/constants";
@@ -18,8 +19,10 @@ export default function DiffViewer() {
         toolName={TOOL_NAMES.DIFF_VIEWER}
         maxWidth="7xl"
         headerRight={<DiffViewerHeader />}
+        showDataHandling={false}
       >
         <DiffViewerShell />
+        <DiffViewerDocumentation />
       </ToolFrame>
     </DiffViewerProvider>
   );
